@@ -1,0 +1,21 @@
+fastlane_version '2.212.2'
+
+skip_docs
+
+platform :android do 
+    desc "Build"
+    lane :build do
+      gradle(task: 'clean', project_dir: 'android/')
+      gradle(task: 'bundle', build_type: 'Release', project_dir: 'android/')
+    end
+
+    desc "Deploy"
+    lane :deploy do
+      upload_to_play_store(
+        track: "internal",
+        aab: "android/app/build/outputs/bundle/release/app-release.aab",
+        package_name: "nz.geek.colin.scansavvy",
+        json_key: ENV['GOOGLE_PLAY_JSON_KEY']
+      )
+    end
+  end
