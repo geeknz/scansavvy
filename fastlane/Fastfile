@@ -19,3 +19,13 @@ platform :android do
       )
     end
   end
+
+  platform :ios do
+    desc "Build"
+    lane :build do
+      build_app(
+        workspace: "ios/ScanSavvy.xcworkspace",
+        scheme: "ScanSavvy"
+      )
+    end
+  end
