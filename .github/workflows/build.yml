@@ -3,15 +3,15 @@ name: Build ScanSavvy
 on:
   push:
     branches:
-      - master
+      - feature/ios
   pull_request:
     branches:
-      - master
+      - feature/ios
 
 jobs:
-  android:
-    name: Build for Android
-    runs-on: ubuntu-latest
+  ios:
+    name: Build for iOS
+    runs-on: macos-latest
 
     steps:
     - name: Setup Node.js
@@ -24,50 +24,16 @@ jobs:
       with:
         ruby-version: 2.7
 
-    - name: Setup GitVersion
-      uses: gittools/actions/gitversion/setup@v0
-      with:
-        versionSpec: '5.x'
-
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
-    - name: GitVersion
-      id: git_version
-      uses: gittools/actions/gitversion/execute@v0
-
-    - name: Android Version
-      id: android_version
-      run: |
-        echo "code=$((${{ steps.git_version.outputs.major }} * 10000 + ${{ steps.git_version.outputs.minor }} * 100 + ${{ steps.git_version.outputs.patch }}))" >> $GITHUB_OUTPUT
-
     - name: Install Dependencies
-      run: | 
+      run: |
         npm install &
         bundle install &
         wait
 
-    - name: Base64 Decode Keystore
-      id: keystore
-      uses: timheuer/base64-to-file@v1.2
-      with:
-        fileName: 'keystore.jks'
-        encodedString: ${{ secrets.KEYSTORE }}
-
     - name: Build v${{ steps.git_version.outputs.fullSemVer }}
-      env:
-        VERSION_CODE: ${{ steps.android_version.outputs.code }}
-        VERSION_NAME: ${{ steps.git_version.outputs.semVer }}
-        SIGNING_STORE_FILE: ${{ steps.keystore.outputs.filePath }}
-        SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-        SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-        SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-      run: bundle exec fastlane android build
-
-    - name: Upload Artifact (scansavvy-${{ steps.git_version.outputs.fullSemVer }}.aab)
-      uses: actions/upload-artifact@v2
-      with:
-        name: scansavvy-${{ steps.git_version.outputs.fullSemVer }}.aab
-        path: android/app/build/outputs/bundle/release/app-release.aab
+      run: bundle exec fastlane ios build
