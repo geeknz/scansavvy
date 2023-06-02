@@ -39,9 +39,9 @@ jobs:
       run: |
         echo -n "${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE }}" | base64 --decode -o "$RUNNER_TEMP/distribution.p12"
         echo "${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD }}" | openssl pkcs12 -info -noout -in "$RUNNER_TEMP/distribution.p12" -passin stdin
-        security create-keychain -p "${{ secrets.APPLE_KEYCHAIN_PASSWORD }}" "$RUNNER_TEMP/app-signing.keychain-db"
+        security create-keychain -p "ABC" "$RUNNER_TEMP/app-signing.keychain-db"
         security set-keychain-settings -lut 7200 "$RUNNER_TEMP/app-signing.keychain-db"
-        security unlock-keychain -p "${{ secrets.APPLE_KEYCHAIN_PASSWORD }}" "$RUNNER_TEMP/app-signing.keychain-db"
+        security unlock-keychain -p "ABC" "$RUNNER_TEMP/app-signing.keychain-db"
         security import "$RUNNER_TEMP/distribution.p12" -P "${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD }}" -A -t cert -f pkcs12 -k "$RUNNER_TEMP/app-signing.keychain-db"
         security list-keychain -d user -s "$RUNNER_TEMP/app-signing.keychain-db"
 
