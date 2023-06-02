@@ -35,5 +35,14 @@ jobs:
         bundle install &
         wait
 
-    - name: Build v${{ steps.git_version.outputs.fullSemVer }}
-      run: bundle exec fastlane ios build
+    - name: Install Apple Distribution Certificate
+      run: |
+        echo -n ${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE }} | base64 --decode > $RUNNER_TEMP/distribution.p12
+        security create-keychain -p ${{ secrets.APPLE_KEYCHAIN_PASSWORD }} $RUNNER_TEMP/app-signing.keychain-db
+        security set-keychain-settings -lut 7200 $RUNNER_TEMP/app-signing.keychain-db
+        security unlock-keychain -p ${{ secrets.APPLE_KEYCHAIN_PASSWORD }} $RUNNER_TEMP/app-signing.keychain-db
+        security import $RUNNER_TEMP/distribution.p12 -P ${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD }} -A -t cert -f pkcs12 -k $RUNNER_TEMP/app-signing.keychain-db
+        security list-keychain -d user -s $RUNNER_TEMP/app-signing.keychain-db
+
+    # - name: Build v${{ steps.git_version.outputs.fullSemVer }}
+    #   run: bundle exec fastlane ios build
