@@ -38,7 +38,7 @@ jobs:
     - name: Install Apple Distribution Certificate
       run: |
         echo -n "${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE }}" | base64 --decode -o "$RUNNER_TEMP/distribution.p12"
-        echo "${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD }}" | openssl pkcs12 -info -nokeys -in "$RUNNER_TEMP/distribution.p12" -passin stdin
+        echo "ABC" | openssl pkcs12 -info -nokeys -in "$RUNNER_TEMP/distribution.p12" -passin stdin
         ls -la "$RUNNER_TEMP"
         security create-keychain -p "ABC" "$RUNNER_TEMP/app-signing.keychain-db"
         ls -la "$RUNNER_TEMP"
