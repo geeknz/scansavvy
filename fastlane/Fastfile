@@ -27,6 +27,7 @@ platform :android do
         podfile: "ios/Podfile"
       )
       build_app(
+        scheme: "ScanSavvy",
         workspace: "ios/ScanSavvy.xcworkspace",
         export_method: "app-store",
         export_options: {
