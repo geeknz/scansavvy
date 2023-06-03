@@ -25,7 +25,8 @@ platform :android do
     lane :build do
       update_code_signing_settings(
         use_automatic_signing: false,
-        path: "ios/ScanSavvy.xcodeproj"
+        path: "ios/ScanSavvy.xcodeproj",
+        team_id: "7AK94PMMKB"
       )
       update_project_provisioning(
         xcodeproj: "ios/ScanSavvy.xcodeproj",
