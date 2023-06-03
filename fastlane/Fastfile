@@ -27,19 +27,16 @@ platform :android do
         podfile: "ios/Podfile"
       )
       update_code_signing_settings(
-        use_automatic_signing: false,
-        path: "ios/ScanSavvy.xcodeproj",
-        code_signing_identity: "Apple Distribution: Colin Campbell (7AK94PMMKB)",
+        team_id: "7AK94PMMKB",
+        sdk: "iphoneos",
+        code_signing_identity: "iPhone Distribution",
+        profileName: "Scan Savvy Distribution",
+        bundle_identifier: "nz.geek.colin.scansavvy"
       )
       build_app(
         scheme: "ScanSavvy",
         workspace: "ios/ScanSavvy.xcworkspace",
         export_method: "app-store",
-        export_options: {
-          provisioningProfiles: {
-            "nz.geek.colin.scansavvy": "Scan Savvy Distribution"
-          }
-        }
       )
     end
   end
