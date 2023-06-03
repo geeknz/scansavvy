@@ -23,16 +23,16 @@ platform :android do
   platform :ios do
     desc "Build"
     lane :build do
-      cocoapods(
-        podfile: "ios/Podfile"
-      )
       update_code_signing_settings(
         use_automatic_signing: false,
         path: "ios/ScanSavvy.xcodeproj"
       )
       update_project_provisioning(
         xcodeproj: "ios/ScanSavvy.xcodeproj",
-        profile: "~/Library/MobileDevice/Provisioning\ Profiles/build.mobileprovision"
+        profile: "/Users/runner/Library/MobileDevice/Provisioning Profiles/build.mobileprovision"
+      )
+      cocoapods(
+        podfile: "ios/Podfile"
       )
       build_app(
         scheme: "ScanSavvy",
