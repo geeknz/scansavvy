@@ -28,14 +28,8 @@ platform :android do
       )
       build_app(
         workspace: "ios/ScanSavvy.xcworkspace",
-        scheme: "ScanSavvy",
-        clean: true,
-        export_method: "ad-hoc"
-      )
-      gym(
-        configuration: "Release",
-        scheme: "ScanSavvy",
-        export_method: "ad-hoc"
+        scheme: "Release",
+        export_method: "app-store",
       )
     end
   end
