@@ -28,11 +28,11 @@ platform :android do
       )
       update_code_signing_settings(
         use_automatic_signing: false,
-        team_id: "7AK94PMMKB",
-        sdk: "iphoneos",
-        code_sign_identity: "Apple Distribution: Colin Campbell (7AK94PMMKB)",
-        profile_name: "Scan Savvy Distribution",
         path: "ios/ScanSavvy.xcodeproj"
+      )
+      update_project_provisioning(
+        xcodeproj: "ios/ScanSavvy.xcodeproj",
+        profile: "~/Library/MobileDevice/Provisioning\ Profiles/build.mobileprovision"
       )
       build_app(
         scheme: "ScanSavvy",
