@@ -30,9 +30,9 @@ platform :android do
         use_automatic_signing: false,
         team_id: "7AK94PMMKB",
         sdk: "iphoneos",
-        code_sign_identity: "iPhone Distribution",
-        profileName: "Scan Savvy Distribution",
-        bundle_identifier: "nz.geek.colin.scansavvy"
+        code_sign_identity: "Apple Distribution: Colin Campbell (7AK94PMMKB)",
+        bundle_identifier: "nz.geek.colin.scansavvy",
+        path: "ios/ScanSavvy.xcodeproj"
       )
       build_app(
         scheme: "ScanSavvy",
