@@ -27,9 +27,10 @@ platform :android do
         podfile: "ios/Podfile"
       )
       update_code_signing_settings(
+        use_automatic_signing: false,
         team_id: "7AK94PMMKB",
         sdk: "iphoneos",
-        code_signing_identity: "iPhone Distribution",
+        code_sign_identity: "iPhone Distribution",
         profileName: "Scan Savvy Distribution",
         bundle_identifier: "nz.geek.colin.scansavvy"
       )
