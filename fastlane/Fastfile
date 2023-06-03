@@ -28,7 +28,6 @@ platform :android do
       )
       build_app(
         workspace: "ios/ScanSavvy.xcworkspace",
-        scheme: "Release",
         export_method: "app-store",
         export_options: {
           provisioningProfiles: {
