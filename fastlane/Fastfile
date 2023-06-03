@@ -30,6 +30,11 @@ platform :android do
         workspace: "ios/ScanSavvy.xcworkspace",
         scheme: "Release",
         export_method: "app-store",
+        export_options: {
+          provisioningProfiles: {
+            "nz.geek.colin.scansavvy": "Scan Savvy Distribution"
+          }
+        }
       )
     end
   end
