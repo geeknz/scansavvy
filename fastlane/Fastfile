@@ -26,6 +26,11 @@ platform :android do
       cocoapods(
         podfile: "ios/Podfile"
       )
+      update_code_signing_settings(
+        use_automatic_signing: false,
+        path: "ios/ScanSavvy.xcodeproj",
+        code_signing_identity: "Apple Distribution: Colin Campbell (7AK94PMMKB)",
+      )
       build_app(
         scheme: "ScanSavvy",
         workspace: "ios/ScanSavvy.xcworkspace",
