@@ -32,7 +32,7 @@ platform :android do
       )
       update_project_provisioning(
         xcodeproj: "ios/ScanSavvy.xcodeproj",
-        profile: "/Users/runner/Library/MobileDevice/Provisioning Profiles/0d739ea9-e746-454b-ac70-99da724332b6.mobileprovision"
+        profile: "/Users/runner/Library/MobileDevice/Provisioning Profiles/build.mobileprovision"
       )
       cocoapods(
         podfile: "ios/Podfile"
