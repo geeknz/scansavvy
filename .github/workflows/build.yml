@@ -47,7 +47,7 @@ jobs:
     - name: Install Apple Provisioning Profile
       run: |
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        echo -n "${{ secrets.APPLE_PROVISIONING_PROFILE }}" | base64 --decode -o ~/Library/MobileDevice/Provisioning\ Profiles/build.mobileprovision
+        echo -n "${{ secrets.APPLE_PROVISIONING_PROFILE }}" | base64 --decode -o ~/Library/MobileDevice/Provisioning\ Profiles/0d739ea9-e746-454b-ac70-99da724332b6.mobileprovision
 
     - name: Build # v${{ steps.git_version.outputs.fullSemVer }}
       run: bundle exec fastlane ios build
