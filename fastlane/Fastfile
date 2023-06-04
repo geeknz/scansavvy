@@ -27,8 +27,6 @@ platform :android do
         use_automatic_signing: false,
         path: "ios/ScanSavvy.xcodeproj",
         bundle_identifier: "nz.geek.colin.ScanSavvy",
-        team_id: "7AK94PMMKB",
-        code_sign_identity: "Apple Distribution: Colin Campbell (7AK94PMMKB)",
         profile_name: "Scan Savvy Distribution"
       )
       cocoapods(
