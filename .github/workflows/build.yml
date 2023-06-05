@@ -45,12 +45,14 @@ jobs:
         security list-keychain -d user -s "$RUNNER_TEMP/signing.keychain-db"
 
     - name: Install Apple Provisioning Profile
+      id: provisioning_profile
       run: |
         mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
         echo -n "${{ secrets.APPLE_PROVISIONING_PROFILE }}" | base64 --decode -o "$HOME/Library/MobileDevice/Provisioning Profiles/Scan_Savvy_Distribution.mobileprovision"
+        echo "path=$HOME/Library/MobileDevice/Provisioning Profiles/Scan_Savvy_Distribution.mobileprovision" >> $GITHUB_OUTPUT
 
     - name: Build # v${{ steps.git_version.outputs.fullSemVer }}
       env:
         FASTLANE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-        FL_PROJECT_PROVISIONING_PROFILE_FILE: "${{ env.HOME }}/Library/MobileDevice/Provisioning Profiles/Scan_Savvy_Distribution.mobileprovision"
+        FL_PROJECT_PROVISIONING_PROFILE_FILE: ${{ steps.provisioning_profile.outputs.path }}
       run: bundle exec fastlane ios build
