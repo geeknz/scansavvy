@@ -1,6 +1,7 @@
 fastlane_version '2.212.2'
 
 skip_docs
+opt_out_usage
 
 platform :android do 
     desc "Build"
@@ -23,12 +24,12 @@ platform :android do
   platform :ios do
     desc "Build"
     lane :build do
+      update_project_provisioning(
+        xcodeproj: "ios/ScanSavvy.xcodeproj",
+      )
       update_code_signing_settings(
         use_automatic_signing: false,
-        path: "ios/ScanSavvy.xcodeproj",
-        bundle_identifier: "nz.geek.colin.ScanSavvy",
-        team_id: "7AK94PMMKB",
-        profile_name: "Scan Savvy Distribution"
+        path: "ios/ScanSavvy.xcodeproj"
       )
       cocoapods(
         podfile: "ios/Podfile"
