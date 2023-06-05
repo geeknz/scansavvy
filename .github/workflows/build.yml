@@ -52,5 +52,5 @@ jobs:
     - name: Build # v${{ steps.git_version.outputs.fullSemVer }}
       env:
         FASTLANE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-        FL_PROJECT_PROVISIONING_PROFILE_FILE: "$HOME/Library/MobileDevice/Provisioning Profiles/Scan_Savvy_Distribution.mobileprovision"
+        FL_PROJECT_PROVISIONING_PROFILE_FILE: "${{ env.HOME }}/Library/MobileDevice/Provisioning Profiles/Scan_Savvy_Distribution.mobileprovision"
       run: bundle exec fastlane ios build
