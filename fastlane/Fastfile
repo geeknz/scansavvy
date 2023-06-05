@@ -29,7 +29,8 @@ platform :android do
       )
       update_code_signing_settings(
         use_automatic_signing: false,
-        path: "ios/ScanSavvy.xcodeproj"
+        path: "ios/ScanSavvy.xcodeproj",
+        bundle_identifier: "nz.geek.colin.ScanSavvy"
       )
       cocoapods(
         podfile: "ios/Podfile"
